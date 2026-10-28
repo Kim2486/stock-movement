@@ -1,6 +1,6 @@
 <?php
 
-// บังคับแสดง Error ทั้งหมดออกหน้าจอและ Logs
+// สั่งพ่น Error ออกหน้าจอเบราว์เซอร์โดยตรง
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
@@ -8,11 +8,10 @@ error_reporting(E_ALL);
 putenv('APP_DEBUG=true');
 $_ENV['APP_DEBUG'] = 'true';
 
-// กำหนดโฟลเดอร์ Storage และ View ไปที่ /tmp (Read-Write ของ Vercel)
+// กำหนดโฟลเดอร์สำหรับ Serverless
 $_ENV['APP_STORAGE'] = '/tmp/storage';
 $_ENV['VIEW_COMPILED_PATH'] = '/tmp/storage/framework/views';
 
-// โครงสร้างโฟลเดอร์ที่ Laravel จำเป็นต้องใช้
 $directories = [
     '/tmp/storage/app/public',
     '/tmp/storage/framework/cache/data',
@@ -28,4 +27,12 @@ foreach ($directories as $dir) {
     }
 }
 
-require __DIR__ . '/../public/index.php';
+// ครอบ try-catch เพื่อจับ Error จาก Laravel
+try {
+    require __DIR__ . '/../public/index.php';
+} catch (\Throwable $e) {
+    echo '<h1>Laravel Fatal Error</h1>';
+    echo '<p><b>Message:</b> ' . htmlspecialchars($e->getMessage()) . '</p>';
+    echo '<p><b>File:</b> ' . htmlspecialchars($e->getFile()) . ' on line ' . $e->getLine() . '</p>';
+    echo '<pre>' . htmlspecialchars($e->getTraceAsString()) . '</pre>';
+}
