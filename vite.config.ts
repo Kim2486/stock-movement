@@ -17,10 +17,13 @@ export default defineConfig({
                 },
             },
         }),
-        // ตรวจสอบว่าถ้าอยู่บน Vercel จะไม่เรียกใช้งาน wayfinder เพื่อป้องกัน error "php: command not found"
+        // ถ้าอยู่บน Vercel จะไม่เรียกใช้งาน wayfinder ป้องกัน error "php: command not found"
         ...(process.env.VERCEL ? [] : [wayfinder()]),
     ],
     build: {
-        cssMinify: 'esbuild', // ใช้ esbuild บีบอัด CSS เพื่อป้องกัน warning สัญลักษณ์ Tailwind v4 ใน Build Log
+        cssMinify: 'esbuild',
+    },
+    css: {
+        transformer: 'postcss',
     },
 });
