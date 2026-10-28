@@ -10,14 +10,7 @@ export type QueryParams = {
 };
 
 type Method =
-    | "get"
-    | "post"
-    | "put"
-    | "delete"
-    | "patch"
-    | "head"
-    | "options"
-    | "query";
+    "get" | "post" | "put" | "delete" | "patch" | "head" | "options" | "query";
 type UrlDefaults = Record<string, unknown>;
 
 let urlDefaults: () => UrlDefaults = () => ({});
@@ -180,6 +173,3 @@ export const validateParameters = (
         }
     }
 };
-
-// เพิ่มการส่งออก home ตรงนี้เพื่อแก้ปัญหา Build บน Vercel
-export const home = () => '/';
