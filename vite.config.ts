@@ -17,13 +17,15 @@ export default defineConfig({
                 },
             },
         }),
-        // ถ้าอยู่บน Vercel จะไม่เรียกใช้งาน wayfinder ป้องกัน error "php: command not found"
+        // ถ้าอยู่บน Vercel จะไม่เรียกใช้งาน wayfinder เพื่อป้องกัน error "php: command not found"
         ...(process.env.VERCEL ? [] : [wayfinder()]),
     ],
     build: {
         cssMinify: 'esbuild',
     },
     css: {
-        transformer: 'postcss',
+        lightningcss: {
+            unusedSymbols: [],
+        },
     },
 });
