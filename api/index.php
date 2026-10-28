@@ -7,18 +7,23 @@ error_reporting(E_ALL);
 putenv('APP_DEBUG=true');
 $_ENV['APP_DEBUG'] = 'true';
 
+// ปิดการใช้งาน Inertia DevTools ไม่ให้สั่งเขียนไฟล์
+$_ENV['INERTIA_DEVTOOLS'] = 'false';
+$_ENV['INERTIA_DEVTOOLS_ENABLED'] = 'false';
+$_ENV['INERTIA_DEVTOOLS_PATH'] = '/tmp/storage/inertia-devtools';
+
 // ย้าย Storage Path และ View Compiled Path ไปที่ /tmp
 $_ENV['APP_STORAGE'] = '/tmp/storage';
 $_ENV['VIEW_COMPILED_PATH'] = '/tmp/storage/framework/views';
 
-// ย้าย Bootstrap Cache ไปที่ /tmp (แก้ปัญหา bootstrap/cache must be writable)
+// ย้าย Bootstrap Cache ไปที่ /tmp
 $_ENV['APP_SERVICES_CACHE'] = '/tmp/storage/bootstrap/services.php';
 $_ENV['APP_PACKAGES_CACHE'] = '/tmp/storage/bootstrap/packages.php';
 $_ENV['APP_CONFIG_CACHE'] = '/tmp/storage/bootstrap/config.php';
 $_ENV['APP_ROUTES_CACHE'] = '/tmp/storage/bootstrap/routes.php';
 $_ENV['APP_EVENTS_CACHE'] = '/tmp/storage/bootstrap/events.php';
 
-// บังคับเปลี่ยน Log Channel ให้พ่นออก stderr สำหรับ Serverless
+// บังคับเปลี่ยน Log Channel ให้พ่นออก stderr
 $_ENV['LOG_CHANNEL'] = 'stderr';
 
 $directories = [
@@ -29,6 +34,7 @@ $directories = [
     '/tmp/storage/framework/views',
     '/tmp/storage/logs',
     '/tmp/storage/bootstrap',
+    '/tmp/storage/inertia-devtools',
 ];
 
 foreach ($directories as $dir) {
