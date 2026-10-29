@@ -17,7 +17,11 @@ export default defineConfig({
                 },
             },
         }),
-        // ถ้าอยู่บน Vercel จะไม่เรียกใช้งาน wayfinder เพื่อป้องกัน error "php: command not found"
+        // ป้องกัน error บน Vercel
         ...(process.env.VERCEL ? [] : [wayfinder()]),
     ],
+    // เพิ่มส่วนนี้เพื่อจัดการและซ่อน Warnings ของ CSS/LightningCSS ตอน Build
+    css: {
+        transformer: 'postcss', // สลับมาใช้ PostCSS แทน LightningCSS ในการแปลงโค้ด เพื่อเลี่ยงปัญหา Unknown at rule ของ Tailwind v4 บน Vercel
+    },
 });
