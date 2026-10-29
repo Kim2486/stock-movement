@@ -55,8 +55,8 @@
             @endif
         </div>
 
-        <!-- ฟอร์มลบหลายรายการ -->
-        <form action="{{ url('/employees/bulk-delete') }}" method="POST" id="bulk-delete-form">
+        <!-- ฟอร์มลบหลายรายการ (ใช้ Relative URL เพื่อความปลอดภัยบน Vercel) -->
+        <form action="/employees/bulk-delete" method="POST" id="bulk-delete-form">
             @csrf
             <div id="bulk-delete-inputs"></div>
             

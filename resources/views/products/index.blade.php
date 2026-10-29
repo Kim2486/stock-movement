@@ -15,7 +15,7 @@
                 <p class="text-sm text-gray-500 mt-1">ดึงข้อมูลโดยตรงจาก Kintone และจัดเก็บข้อมูลบน AWS RDS</p>
             </div>
             <div class="flex flex-wrap items-center gap-3">
-                <!-- ปุ่มกลับหน้าหลัก (เอากรอบดำออก ใช้กรอบบางสีเทาอ่อน สบายตา) -->
+                <!-- ปุ่มกลับหน้าหลัก -->
                 <a href="/" class="inline-flex items-center px-4 py-2.5 bg-white border border-slate-300 text-slate-800 hover:bg-slate-800 hover:text-white text-sm font-medium rounded-xl shadow-sm hover:shadow-slate-200 transition-all duration-200 group">
                     <span class="mr-2 text-base group-hover:scale-110 transition-transform">🏠</span>
                     <span>หน้าหลัก</span>
@@ -57,8 +57,8 @@
             @endif
         </div>
 
-        <!-- ฟอร์มลบหลายรายการ -->
-        <form action="{{ url('/products/bulk-delete') }}" method="POST" id="bulk-delete-form">
+        <!-- ฟอร์มลบหลายรายการ (แก้ไขเป็น Relative URL เรียบร้อย) -->
+        <form action="/products/bulk-delete" method="POST" id="bulk-delete-form">
             @csrf
             <div id="bulk-delete-inputs"></div>
             
